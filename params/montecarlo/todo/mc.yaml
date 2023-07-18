@@ -1,0 +1,12 @@
+estimators:
+  - t_test
+  - mann_whitney
+  - z_prop_test
+lifts:
+  start: 0
+  end: 10
+  by: 1
+#Бонус - трансформации
+#transforms:
+#  - np.log
+#  - np.sqrt

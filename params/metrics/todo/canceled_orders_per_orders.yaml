@@ -1,0 +1,14 @@
+name: Canceled Orders per Orders
+type: ratio
+estimator: prop_test
+level: user_pseudo_id
+numerator:
+  aggregation_field: order_id
+  aggregation_function: count_distinct
+numerator_conditions:
+  - condition_field: pg_status
+    comparison_sign: equal
+    comparison_value: CANCELED
+denominator:
+  aggregation_field: order_id
+  aggregation_function: count_distinct

@@ -1,0 +1,10 @@
+name: Average Order Value
+type: ratio
+estimator: t_test
+level: user_pseudo_id
+numerator:
+  aggregation_field: revenue
+  aggregation_function: sum
+denominator:
+  aggregation_field: order_id
+  aggregation_function: count_distinct

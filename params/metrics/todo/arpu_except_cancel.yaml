@@ -1,0 +1,14 @@
+name: Average Revenuer Per User Without Cancelllations
+type: ratio
+estimator: t_test
+level: user_pseudo_id
+numerator:
+  aggregation_field: revenue
+  aggregation_function: sum
+numerator_conditions:
+  - condition_field: pg_status
+    comparison_sign: not_equal
+    comparison_value: CANCELED
+denominator:
+  aggregation_field: user_pseudo_id
+  aggregation_function: count_distinct
