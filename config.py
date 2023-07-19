@@ -22,4 +22,4 @@ DEFAULT_VALUE = "Unknown"
 VARIANT_COL = "experiment_variant"
 USER_ID_COL = "client_id"
 
-
+MONTE_CARLO_CONFIGS = "params/montecarlo/"

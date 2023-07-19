@@ -131,6 +131,7 @@ class ProportionsZtest(Estimator):
         try:
             count_arr = [stat.num_0.sum(), stat.num_1.sum()]
             num_arr = [stat.n_0, stat.n_1]
+            print(num_arr, count_arr)
             statistic, pvalue = proportions_ztest(count_arr, num_arr)
         except Exception as e:
             cfg.logger.error(e)

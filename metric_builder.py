@@ -7,7 +7,11 @@ from yaml.loader import SafeLoader
 from os import listdir
 
 
-def _load_yaml_preset(preset="default"):
+def _load_yaml_preset(preset="default", mc=False):
+    if mc:
+        preset_path = config.MONTE_CARLO_CONFIGS + preset
+        with open(preset_path) as f:
+            return yaml.load(f, Loader=SafeLoader)
     preset_path = config.PATH_METRIC_CONFIGS + preset
     metrics_to_load = listdir(preset_path)
     metrics = []
@@ -104,7 +108,13 @@ class CalculateMetric:
         except:
             return df[col]
 
-    def __call__(self, df):
+    def __call__(self, df, lift=None):
+
+        if lift is not None:
+            df[config.VARIANT_COL] = np.random.choice(2, len(df))
+            if lift > 0:
+                df[self.metric.numerator_aggregation_field] *= lift
+
         return df.groupby([config.VARIANT_COL, self.metric.level]).apply(
             lambda df: pd.Series({
                 "num": self.metric.numerator_aggregation_function(
